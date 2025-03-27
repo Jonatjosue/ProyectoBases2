@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\proyectoMMSBS2.props" />
+</Project>
