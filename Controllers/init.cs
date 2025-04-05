@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace proyectoMMSBS2.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("apiDb")]
     public class init : ControllerBase
     {
         private static readonly string[] Summaries = new[]
