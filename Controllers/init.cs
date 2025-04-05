@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -23,10 +24,10 @@ namespace proyectoMMSBS2.Controllers
             db = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        [HttpGet(), Route("/Login")]
-        public ActionResult<int> Get()
+        [HttpPost(), Route("/Login")]
+        public ActionResult<int> Post(int idUsuario,int idLogin,string parametro1)
         {
-            var result =    db.Database.SqlQueryRaw<int>("exec PRUEBASP").AsEnumerable().FirstOrDefault();
+            var result =    db.Database.SqlQueryRaw<int>("exec ValidarLogin {0},{1},{2}",idUsuario,idLogin,parametro1).AsEnumerable().FirstOrDefault();
             return Ok(result);
         }
     }
