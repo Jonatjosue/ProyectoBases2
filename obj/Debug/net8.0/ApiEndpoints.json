@@ -1,12 +1,28 @@
 [
   {
     "ContainingType": "proyectoMMSBS2.Controllers.init",
-    "Method": "Get",
+    "Method": "Post",
     "RelativePath": "Login",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "idUsuario",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "idLogin",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "parametro1",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "System.Int32",
