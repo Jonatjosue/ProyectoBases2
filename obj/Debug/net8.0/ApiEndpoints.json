@@ -1,6 +1,6 @@
 [
   {
-    "ContainingType": "proyectoMMSBS2.Controllers.init",
+    "ContainingType": "proyectoMMSBS2.Controllers.initDb",
     "Method": "Post",
     "RelativePath": "Login",
     "HttpMethod": "POST",
@@ -8,24 +8,24 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "idUsuario",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "idLogin",
-        "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "parametro1",
-        "Type": "System.String",
-        "IsRequired": false
+        "Name": "login",
+        "Type": "proyectoMMSBS2.DTOs.validarLogin",
+        "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "proyectoMMSBS2.Controllers.initDb",
+    "Method": "roles",
+    "RelativePath": "Roles",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": [
       {
-        "Type": "System.Int32",
+        "Type": "System.Collections.Generic.List\u00601[[proyectoMMSBS2.DTOs.roleBd, proyectoMMSBS2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",

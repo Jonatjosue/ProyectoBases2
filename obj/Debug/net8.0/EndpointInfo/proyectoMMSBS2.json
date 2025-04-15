@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.4",
   "info": {
     "title": "proyectoMMSBS2",
     "version": "1.0"
@@ -8,32 +8,38 @@
     "/Login": {
       "post": {
         "tags": [
-          "init"
+          "initDb"
         ],
-        "parameters": [
-          {
-            "name": "idUsuario",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "idLogin",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          },
-          {
-            "name": "parametro1",
-            "in": "query",
-            "schema": {
-              "type": "string"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/validarLogin"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/validarLogin"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/validarLogin"
+              }
             }
           }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/Roles": {
+      "get": {
+        "tags": [
+          "initDb"
         ],
         "responses": {
           "200": {
@@ -41,20 +47,26 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "integer",
-                  "format": "int32"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/roleBd"
+                  }
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "integer",
-                  "format": "int32"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/roleBd"
+                  }
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "integer",
-                  "format": "int32"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/roleBd"
+                  }
                 }
               }
             }
@@ -63,5 +75,45 @@
       }
     }
   },
-  "components": { }
+  "components": {
+    "schemas": {
+      "roleBd": {
+        "type": "object",
+        "properties": {
+          "roleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "roleNombre": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "validarLogin": {
+        "required": [
+          "idRole",
+          "parametro1",
+          "usuario"
+        ],
+        "type": "object",
+        "properties": {
+          "usuario": {
+            "type": "string",
+            "nullable": true
+          },
+          "idRole": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "parametro1": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
 }
