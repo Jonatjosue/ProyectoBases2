@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "proyectoMMSBS2.Controllers.initDb",
+    "Method": "RunQuery",
+    "RelativePath": "apiDb/run",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "proyectoMMSBS2.Controllers.initDb\u002BSqlQueryRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "proyectoMMSBS2.Controllers.initDb",
     "Method": "Post",
     "RelativePath": "Login",
     "HttpMethod": "POST",
@@ -14,6 +30,32 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "proyectoMMSBS2.Controllers.initDb",
+    "Method": "postConsultaBD",
+    "RelativePath": "post",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "consulta",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "proyectoMMSBS2.Controllers.initDb",

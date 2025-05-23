@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("proyectoMMSBS2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3cf24a8a182985957703237f74cf14eacd984701")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+29b98d3641c238d306ab56f847af1e24fdf145cb")]
 [assembly: System.Reflection.AssemblyProductAttribute("proyectoMMSBS2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("proyectoMMSBS2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

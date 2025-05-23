@@ -65,5 +65,51 @@ namespace proyectoMMSBS2.Controllers
             var result = db.Database.SqlQueryRaw<roleBd>("exec obtieneRoles").ToList();
             return Ok(result);
         }
+        [HttpPut(), Route("/post")]
+        public ActionResult<String> postConsultaBD(String consulta) {
+
+
+            var resultado = db.Database.SqlQueryRaw<string>(consulta).ToList();
+
+            return Ok(resultado);
+        }
+        [HttpPost("run")]
+        public async Task<IActionResult> RunQuery([FromBody] SqlQueryRequest request)
+        {
+            try
+            {
+                using var command = db.Database.GetDbConnection().CreateCommand();
+                command.CommandText = request.Sql;
+                db.Database.OpenConnection();
+
+                using var reader = await command.ExecuteReaderAsync();
+
+                var result = new List<Dictionary<string, object>>();
+                var columns = new List<string>();
+
+                for (int i = 0; i < reader.FieldCount; i++)
+                    columns.Add(reader.GetName(i));
+
+                while (await reader.ReadAsync())
+                {
+                    var row = new Dictionary<string, object>();
+                    for (int i = 0; i < reader.FieldCount; i++)
+                        row[columns[i]] = reader.GetValue(i);
+                    result.Add(row);
+                }
+
+                return Ok(new { columns, rows = result });
+            }
+            catch (Exception ex)
+            {
+                return Ok(new { error = ex.Message });
+            }
+        }
+
+        public class SqlQueryRequest
+        {
+            public string Sql { get; set; }
+        }
+
     }
 }
