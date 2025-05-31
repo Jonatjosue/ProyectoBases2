@@ -102,7 +102,8 @@ namespace proyectoMMSBS2.Controllers
             }
             catch (Exception ex)
             {
-                return Ok(new { error = ex.Message });
+                return StatusCode(500, new { error = ex.Message });
+
             }
         }
 
@@ -111,5 +112,84 @@ namespace proyectoMMSBS2.Controllers
             public string Sql { get; set; }
         }
 
+        [HttpGet(), Route ("/estructura")]
+        public IActionResult ObtenerEstructura()
+        {
+            var resultado = new List<object>();
+
+            try
+            {
+                var conexion = db.Database.GetDbConnection();
+                if (conexion.State != System.Data.ConnectionState.Open)
+                    conexion.Open();
+
+                using (var comando = conexion.CreateCommand())
+                {
+                    comando.CommandText = "SELECT name FROM sys.databases WHERE name NOT IN ('master', 'tempdb', 'model', 'msdb')";
+                    var basesDeDatos = new List<string>();
+                    using (var reader = comando.ExecuteReader())
+                    {
+                        while (reader.Read())
+                            basesDeDatos.Add(reader.GetString(0));
+                    }
+
+                    foreach (var nombreBase in basesDeDatos)
+                    {
+                        var tablas = new List<object>();
+
+                        using (var tabCmd = conexion.CreateCommand())
+                        {
+                            tabCmd.CommandText = $"USE [{nombreBase}]; SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE'";
+                            var tablaNombres = new List<string>();
+
+                            using (var tabReader = tabCmd.ExecuteReader())
+                            {
+                                while (tabReader.Read())
+                                    tablaNombres.Add(tabReader.GetString(0));
+                            }
+
+                            foreach (var nombreTabla in tablaNombres)
+                            {
+                                var columnas = new List<string>();
+                                using (var colCmd = conexion.CreateCommand())
+                                {
+                                    colCmd.CommandText = $"USE [{nombreBase}]; SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '{nombreTabla}'";
+                                    using (var colReader = colCmd.ExecuteReader())
+                                    {
+                                        while (colReader.Read())
+                                            columnas.Add(colReader.GetString(0));
+                                    }
+                                }
+
+                                tablas.Add(new
+                                {
+                                    nombreTabla,
+                                    columnas
+                                });
+                            }
+                        }
+
+                        resultado.Add(new
+                        {
+                            nombreBase,
+                            tablas
+                        });
+                    }
+                }
+
+                return Ok(resultado);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { error = ex.Message });
+            }
+        }
+
+
+
+
+
     }
+
 }
+

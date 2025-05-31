@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\proyectoMMSBS2.props" />
-</Project>
